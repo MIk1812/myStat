@@ -4,6 +4,27 @@ library(gridExtra)
 
 PATH = "/Users/mikkeldanielsen/myStat/"
 
+oneSampleConf <- function(x, s, n, alpha){
+  t<-qt(1-alpha/2, n-1)
+  delta<-(t*s/sqrt(n))
+  
+  cat("t =", t,
+      "\n+/- =", delta,
+      "\nlow =", x-delta,
+      "\nhigh =", x+delta)
+}
+
+ioneSampleConf <- function(...){
+  
+  img <- c("oneSampleConf.png")
+  printImages(img, 1, 1)
+  
+  cat("(x, s, n, alpha)",
+      "\nx = mean",
+      "\ns = standard deviation",
+      "\nn = number of observations")
+}
+
 twoSampleHyp <- function(x1, s1, n1, x2, s2, n2, alpha){
   tobs <- abs(((x1-x2)-0)/(sqrt((s1^2/n1)+(s2^2/n2))))
   v <- ((s1^2/n1)+(s2^2/n2))^2/(((s1^2/n1)^2/(n1-1))+((s2^2/n2)^2/(n2-1)))
@@ -21,7 +42,7 @@ itwoSampleHyp <- function(...){
   img <- c("twoSampleHyp.png")
   printImages(img, 1, 1)
   
-  cat("(x1, s1, n1, x2, s2, n2)",
+  cat("(x1, s1, n1, x2, s2, n2, alpha)",
       "\nx = mean",
       "\ns = standard deviation",
       "\nn = number of observations")
