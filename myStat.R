@@ -7,9 +7,7 @@ ROOT = "/Users/mikkeldanielsen/myStat/"
 ## Linear Regression ##
 
 linReg <- function(x, y){
-  
   Sxx <- sum((x - mean(x))^2)
-  
   beta1hat <- sum((x - mean(x))*(y - mean(y))) / Sxx
   beta0hat <- mean(y) - beta1hat * mean(x)
   
@@ -35,7 +33,6 @@ ilinReg <- function(...){
 }
 
 linStdErr <- function(x, y){
-
   sumErr = sum(linResiduals(x,y)^2)
   StdErr = sqrt(sumErr/(length(x)-2))
   
@@ -60,7 +57,6 @@ ilinStdErr <- function(...){
 }
 
 linResiduals <- function(x,y){
-  
   sink("null"); params <- linReg(x,y); sink()
   beta0 <- params[1]
   beta1 <- params[2]
@@ -70,7 +66,7 @@ linResiduals <- function(x,y){
 
 ilinResiduals <- function(...){
   cat(
-    "Calculate residuals",
+    "Calculate all residuals",
     "\n\n(x, y)",
     "\nx, y = vector of observations",
     "\n\nreturns vector of residuals"
@@ -80,7 +76,6 @@ ilinResiduals <- function(...){
 }
 
 linStdErrBeta <- function(x,y){
-  
   sink("null"); StdErr <- linStdErr(x,y); sink()
   Sxx <- sum((x - mean(x))^2)
   n <- length(x)
@@ -99,7 +94,7 @@ linStdErrBeta <- function(x,y){
 
 ilinStdErrBeta <- function(...){
   cat(
-    "Calculate standard error for beat0 and 1 in linear relation",
+    "Calculate standard error for beat0 and 1 in linear regression",
     "\n\n(x, y)",
     "\nx, y = vectors of observations",
     "\n\nreturns c(StdErrBeta0, StdErrBeta1)"
@@ -109,8 +104,8 @@ ilinStdErrBeta <- function(...){
   printImages(img, 1, 1)
 }
 
-linHypBeta <- function(beta, stdErr, n, alpha, delta){
-  tobs <- (beta-delta)/(stdErr)
+linHypBeta <- function(beta, stdErrBeta, n, alpha, delta){
+  tobs <- (beta-delta)/(stdErrBeta)
   p <- 2*(1-pt(abs(tobs), n-2))
   c <- qt(1-alpha/2, n-2)
   
@@ -127,12 +122,12 @@ linHypBeta <- function(beta, stdErr, n, alpha, delta){
 ilinHypBeta <- function(...){
   cat(
     "Hypothesis test for beta in linear regression",
-    "\n\n(beta, stdErr, n, alpha, delta)",
+    "\n\n(beta, stdErrBeta, n, alpha, delta)",
     "\nbeta = beta value",
     "\nstdErr = standard error of beta",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndelta = hypothetical beta value",
+    "\ndelta = hypothetical beta value (H0)",
     "\n\nreturns c(tobs, p-value, critical value)"
   )
   
@@ -140,18 +135,21 @@ ilinHypBeta <- function(...){
   printImages(img, 1, 1)
 }
 
-linConfBeta <- function(beta, stdErr, n, alpha){
+linConfBeta <- function(beta, stdErrBeta, n, alpha){
   t <- qt(1-alpha/2, n-2)
-  delta <- t*stdErr
+  delta <- t*stdErrBeta
   
   from <- beta-delta
   to <- beta+delta
   
   cat(
-    "t =", t,
-    "\ndelta =", delta,
-    "\n", paste("[", from, "; ", to, "]", sep=""),
-    "\n"
+    paste(
+      "t = ", t,
+      "\ndelta = ", delta,
+      "\n[", from, "; ", to, "]", 
+      "\n", 
+      sep=""
+    )
   )
   
   return(delta)
@@ -160,7 +158,7 @@ linConfBeta <- function(beta, stdErr, n, alpha){
 ilinConfBeta <- function(...){
   cat(
     "Confidence interval for beta in linear regression",
-    "\n\n(beta, stdErr, n, alpha)",
+    "\n\n(beta, stdErrBeta, n, alpha)",
     "\nx = mean",
     "\nstdErr = standard error of beta",
     "\nn = number of observations",
@@ -173,7 +171,6 @@ ilinConfBeta <- function(...){
 }
 
 linConf <- function(x, y, x0, alpha){
-  
   sink("null")
   params <-linReg(x,y); 
   stdErr <- linStdErr(x,y)
@@ -188,17 +185,20 @@ linConf <- function(x, y, x0, alpha){
   Sxx <- sum((x - mean(x))^2)
   
   delta <- t*stdErr*sqrt(1/n+(((x0-mean(x))^2)/Sxx))
-  from <- y0+delta
-  to <- y0-delta
+  from <- y0-delta
+  to <- y0+delta
   
   cat(
-    "beta0 =", beta0,
-    "\nbeta1 =", beta1,
-    "\ny0 =", y0,
-    "\nt =", t,
-    "\ndelta =", delta,
-    "\n", paste("[", from, "; ", to, "]", sep=""),
-    "\n"
+    paste(
+      "beta0 = ", beta0,
+      "\nbeta1 = ", beta1,
+      "\ny0 = ", y0,
+      "\nt = ", t,
+      "\ndelta = ", delta,
+      "\n[", from, "; ", to, "]",
+      "\n",
+      sep=""
+    )
   )
   
   return(c(y0, delta))
@@ -219,7 +219,6 @@ ilinConf <- function(...){
 }
 
 linPredict <- function(x, y, x0, alpha){
-  
   sink("null")
   params <-linReg(x,y); 
   stdErr <- linStdErr(x,y)
@@ -234,17 +233,20 @@ linPredict <- function(x, y, x0, alpha){
   Sxx <- sum((x - mean(x))^2)
   
   delta <- t*stdErr*sqrt(1+1/n+(((x0-mean(x))^2)/Sxx))
-  from <- y0+delta
-  to <- y0-delta
+  from <- y0-delta
+  to <- y0+delta
   
   cat(
-    "beta0 =", beta0,
-    "\nbeta1 =", beta1,
-    "\ny0 =", y0,
-    "\nt =", t,
-    "\ndelta =", delta,
-    "\n", paste("[", from, "; ", to, "]", sep=""),
-    "\n"
+    paste(
+      "beta0 = ", beta0,
+      "\nbeta1 = ", beta1,
+      "\ny0 = ", y0,
+      "\nt = ", t,
+      "\ndelta = ", delta,
+      "\n[", from, "; ", to, "]", 
+      "\n",
+      sep=""
+    )
   )
   
   return(c(y0, delta))
@@ -274,11 +276,14 @@ oneSampleConf <- function(x, s, n, alpha){
   to <- x+delta
   
   cat(
-    "t =", t,
-    "\ndelta =", delta,
-    "\n", paste("[", from, "; ", to, "]", sep=""),
-    "\n"
+    paste(
+      "t = ", t,
+      "\ndelta = ", delta,
+      "\n[", from, "; ", to, "]",
+      "\n",
+      sep=""
     )
+  )
   
   return(delta)
 }
@@ -307,11 +312,14 @@ twoSampleConf <- function(x1, s1, n1, x2, s2, n2, alpha){
   to <- (x1-x2)+delta
  
   cat(
-    "t =", t,
-    "\ndf =", v,
-    "\ndelta =", delta,
-    "\n", paste("[", from, "; ", to, "]", sep=""),
-    "\n"
+    paste(
+      "t = ", t,
+      "\ndf = ", v,
+      "\ndelta = ", delta,
+      "\n[", from, "; ", to, "]",
+      "\n",
+      sep=""
+    )
   )
   
   return(delta)
@@ -357,7 +365,7 @@ ioneSampleHyp <- function(...){
     "\ns = standard deviation",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndelta = hypothetical mean",
+    "\ndelta = hypothetical mean (H0)",
     "\n\nreturns c(tobs, p-value, critical value)"
   )
   
@@ -391,14 +399,37 @@ itwoSampleHyp <- function(...){
     "\ns = standard deviation",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndelta = hypothetical difference",
+    "\ndelta = hypothetical difference (H0)",
     "\n\nreturns c(tobs, df, p-value, critical value)"
     )
   
   img <- c("twoSampleHyp.png")
   printImages(img, 1, 1)
-  
 }
+
+criticalValueT <- function(alpha, df){
+  c <- qt(1-alpha/2, df)
+  
+  cat(
+    "Critical value =", c,
+    "\n"
+  )
+  
+  return(c)
+}
+
+icriticalValueT <- function(...){
+  cat(
+    "Calculate critical value from certain alpha for a given T-dist",
+    "\nalpha = significance level (as decimal)",
+    "\ndf = degrees of freemdom",
+    "\n\nreturns critical value"
+  )
+  
+  img <- c("twoSampleHyp.png")
+  printImages(img, 1, 1)
+}
+
 
 ## Bootstrapping ##
 
@@ -499,16 +530,14 @@ itwoSampleParaBoot <- function(...){
 
 ## Correlation ##
 
-cor <- function(v1, v2){
+cor <- function(set1, set2){
   n <- length(set1)
+  mean1 <- mean(set1)
+  sd1 <- sd(set1)
+  sd2 <- sd(set2)
+  mean2 <- mean(set2)
   
-  mean1 <- mean(v1)
-  sd1 <- sd(v1)
-  
-  sd2 <- sd(v2)
-  mean2 <- mean(v2)
-  
-  covar <- 1/(n-1)*sum((v1-mean1)*(v2-mean2))
+  covar <- 1/(n-1)*sum((set1-mean1)*(set2-mean2))
   cor <- covar/(sd1*sd2)
   
   return(cor)
@@ -519,11 +548,58 @@ icor <- function(...){
     "Calculate correlation between two vectors of equal size",
     "\n\n(v1, v2)",
     "\nv = vector of observations",
-    "\n\nreturn correlation coefficient"
+    "\n\nreturns correlation coefficient"
   )
   
   imgs <- c("covariance.png","correlation.png")
   printImages(imgs, 2, 1)
+}
+
+R2 <- function(x,y){
+  R2=cor(x,y)^2
+  
+  cat(
+    "R^2 =", R2,
+    "\n"
+  )
+  
+  return(R2)
+}
+
+iR2 <- function(...){
+  cat(
+    "Calculate explained variance (R^2) between two vectors of equal size",
+    "\n\n(v1, v2)",
+    "\nv = vector of observations",
+    "\n\nreturns R^2 as decimal"
+  )
+  
+  imgs <- c("R2.png", "R2Cor.png")
+  printImages(imgs, 2, 1)
+}
+
+procentCovnert <- function(p){
+  alpha = 1-p
+  tup = 1-alpha/2
+  tdown = alpha/2
+  
+  cat(
+    paste(
+      "alpha = ", alpha, " = ", alpha*100, "%", 
+      "\n1-alpha/2 = ", tup, " = ", tup*100, "%",
+      "\nalpha/2 = ", tdown, " = ", tdown*100, "%",
+      sep=""
+    )
+  )
+}
+
+iprocentCovnert <- function(...){
+  cat(
+    "Calculates relevant quantities in relation the procent given",
+    "\n\n(p)",
+    "\np = procent as decimal"
+  )
+  
 }
 
 
