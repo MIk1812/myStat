@@ -4,6 +4,266 @@ library(gridExtra)
 
 ROOT = "/Users/mikkeldanielsen/myStat/"
 
+## Linear Regression ##
+
+linReg <- function(x, y){
+  
+  Sxx <- sum((x - mean(x))^2)
+  
+  beta1hat <- sum((x - mean(x))*(y - mean(y))) / Sxx
+  beta0hat <- mean(y) - beta1hat * mean(x)
+  
+  cat(
+    "beta0 =", beta0hat,
+    "\nbeta1 =", beta1hat,
+    "\n"
+  )
+  
+  return(c(beta0hat, beta1hat))
+}
+
+ilinReg <- function(...){
+  cat(
+    "Leasts squares linear regression",
+    "\n\n(x, y)",
+    "\nx, y = vectors of observations",
+    "\n\nreturns c(beta0, beta1)"
+  )
+  
+  img <- c("linReg.png")
+  printImages(img, 1, 1)
+}
+
+linStdErr <- function(x, y){
+
+  sumErr = sum(linResiduals(x,y)^2)
+  StdErr = sqrt(sumErr/(length(x)-2))
+  
+  cat(
+    "Residual std error =", StdErr,
+    "\n"
+  )
+  
+  return(StdErr)
+}
+
+ilinStdErr <- function(...){
+  cat(
+    "Calculate residual standard error for linear relation",
+    "\n\n(x, y)",
+    "\nx, y = vectors of observations",
+    "\n\nreturns redidual standard error"
+  )
+  
+  img <- c("linStdErr.png")
+  printImages(img, 1, 1)
+}
+
+linResiduals <- function(x,y){
+  
+  sink("null"); params <- linReg(x,y); sink()
+  beta0 <- params[1]
+  beta1 <- params[2]
+
+  return(c(y-(beta0+beta1*x)))
+}
+
+ilinResiduals <- function(...){
+  cat(
+    "Calculate residuals",
+    "\n\n(x, y)",
+    "\nx, y = vector of observations",
+    "\n\nreturns vector of residuals"
+  )
+  img <- c("linResiduals.png")
+  printImages(img, 1, 1)
+}
+
+linStdErrBeta <- function(x,y){
+  
+  sink("null"); StdErr <- linStdErr(x,y); sink()
+  Sxx <- sum((x - mean(x))^2)
+  n <- length(x)
+  
+  StdErrBeta0 = StdErr*sqrt(1/n+mean(x)^2/Sxx)
+  StdErrBeta1 = StdErr*sqrt( 1/( sum( (x-mean(x))^2 ) ) )
+  
+  cat(
+    "std error beta0 = ", StdErrBeta0,
+    "\nstd error beta1 = ", StdErrBeta1,
+    "\n"
+  )
+  
+  return(c(StdErrBeta0, StdErrBeta1))
+}
+
+ilinStdErrBeta <- function(...){
+  cat(
+    "Calculate standard error for beat0 and 1 in linear relation",
+    "\n\n(x, y)",
+    "\nx, y = vectors of observations",
+    "\n\nreturns c(StdErrBeta0, StdErrBeta1)"
+  )
+  
+  img <- c("stdErrBetas.png")
+  printImages(img, 1, 1)
+}
+
+linHypBeta <- function(beta, stdErr, n, alpha, delta){
+  tobs <- (beta-delta)/(stdErr)
+  p <- 2*(1-pt(abs(tobs), n-2))
+  c <- qt(1-alpha/2, n-2)
+  
+  cat(
+    "tobs =", tobs,
+    "\np-value =", p,
+    "\nc-value =", c,
+    "\n"
+  )
+  
+  return(c(tobs,p,c))
+}
+
+ilinHypBeta <- function(...){
+  cat(
+    "Hypothesis test for beta in linear regression",
+    "\n\n(beta, stdErr, n, alpha, delta)",
+    "\nbeta = beta value",
+    "\nstdErr = standard error of beta",
+    "\nn = number of observations",
+    "\nalpha = significance level (as decimal)",
+    "\ndelta = hypothetical beta value",
+    "\n\nreturns c(tobs, p-value, critical value)"
+  )
+  
+  img <- c("linHypBeta.png")
+  printImages(img, 1, 1)
+}
+
+linConfBeta <- function(beta, stdErr, n, alpha){
+  t <- qt(1-alpha/2, n-2)
+  delta <- t*stdErr
+  
+  from <- beta-delta
+  to <- beta+delta
+  
+  cat(
+    "t =", t,
+    "\ndelta =", delta,
+    "\n", paste("[", from, "; ", to, "]", sep=""),
+    "\n"
+  )
+  
+  return(delta)
+}
+
+ilinConfBeta <- function(...){
+  cat(
+    "Confidence interval for beta in linear regression",
+    "\n\n(beta, stdErr, n, alpha)",
+    "\nx = mean",
+    "\nstdErr = standard error of beta",
+    "\nn = number of observations",
+    "\nalpha = significance level (as decimal)",
+    "\n\n returns delta"
+  )
+  
+  img <- c("linConfBeta.png")
+  printImages(img, 1, 1)
+}
+
+linConf <- function(x, y, x0, alpha){
+  
+  sink("null")
+  params <-linReg(x,y); 
+  stdErr <- linStdErr(x,y)
+  sink()
+  
+  beta0 <- params[1]
+  beta1 <- params[2]
+  y0 <- beta0+beta1*x0
+  
+  n <- length(x)
+  t <- qt(1-alpha/2, n-2)
+  Sxx <- sum((x - mean(x))^2)
+  
+  delta <- t*stdErr*sqrt(1/n+(((x0-mean(x))^2)/Sxx))
+  from <- y0+delta
+  to <- y0-delta
+  
+  cat(
+    "beta0 =", beta0,
+    "\nbeta1 =", beta1,
+    "\ny0 =", y0,
+    "\nt =", t,
+    "\ndelta =", delta,
+    "\n", paste("[", from, "; ", to, "]", sep=""),
+    "\n"
+  )
+  
+  return(c(y0, delta))
+}
+
+ilinConf <- function(...){
+  cat(
+    "Confidence interval for yhat in linear regression",
+    "\n\n(x, y, x0, alpha)",
+    "\nx, y = vectors of observations",
+    "\nx0 = x-value of interest",
+    "\nalpha = significance level (as decimal)",
+    "\n\n returns c(y0, delta)"
+  )
+  
+  img <- c("linConf.png")
+  printImages(img, 1, 1)
+}
+
+linPredict <- function(x, y, x0, alpha){
+  
+  sink("null")
+  params <-linReg(x,y); 
+  stdErr <- linStdErr(x,y)
+  sink()
+  
+  beta0 <- params[1]
+  beta1 <- params[2]
+  y0 <- beta0+beta1*x0
+  
+  n <- length(x)
+  t <- qt(1-alpha/2, n-2)
+  Sxx <- sum((x - mean(x))^2)
+  
+  delta <- t*stdErr*sqrt(1+1/n+(((x0-mean(x))^2)/Sxx))
+  from <- y0+delta
+  to <- y0-delta
+  
+  cat(
+    "beta0 =", beta0,
+    "\nbeta1 =", beta1,
+    "\ny0 =", y0,
+    "\nt =", t,
+    "\ndelta =", delta,
+    "\n", paste("[", from, "; ", to, "]", sep=""),
+    "\n"
+  )
+  
+  return(c(y0, delta))
+}
+
+ilinPredict <- function(...){
+  cat(
+    "Prediction interval for yhat in linear regression",
+    "\n\n(x, y, x0, alpha)",
+    "\nx, y = vectors of observations",
+    "\nx0 = x-value of interest",
+    "\nalpha = significance level (as decimal)",
+    "\n\n returns c(y0, delta)"
+  )
+  
+  img <- c("linPredict.png")
+  printImages(img, 1, 1)
+}
+
 ## Confidence intervals ##
 
 oneSampleConf <- function(x, s, n, alpha){
@@ -16,23 +276,26 @@ oneSampleConf <- function(x, s, n, alpha){
   cat(
     "t =", t,
     "\ndelta =", delta,
-    "\nfrom =", from,
-    "\nto =", to
+    "\n", paste("[", from, "; ", to, "]", sep=""),
+    "\n"
     )
+  
+  return(delta)
 }
 
 ioneSampleConf <- function(...){
-  img <- c("oneSampleConf.png")
-  printImages(img, 1, 1)
-  
   cat(
     "One sample confidence interval",
     "\n\n(x, s, n, alpha)",
     "\nx = mean",
     "\ns = standard deviation",
     "\nn = number of observations",
-    "\nalpha = significance level (as decimal)"
+    "\nalpha = significance level (as decimal)",
+    "\n\n returns delta"
     )
+  
+  img <- c("oneSampleConf.png")
+  printImages(img, 1, 1)
 }
 
 twoSampleConf <- function(x1, s1, n1, x2, s2, n2, alpha){
@@ -47,23 +310,26 @@ twoSampleConf <- function(x1, s1, n1, x2, s2, n2, alpha){
     "t =", t,
     "\ndf =", v,
     "\ndelta =", delta,
-    "\nfrom =", from,
-    "\nto =", to
+    "\n", paste("[", from, "; ", to, "]", sep=""),
+    "\n"
   )
+  
+  return(delta)
 }
 
 itwoSampleConf <- function(...){
-  img <- c("twoSampleConf.png")
-  printImages(img, 1, 1)
-  
   cat(
     "Two sample confidence interval",
     "\n\n(x1, s1, n1, x2, s2, n2, alpha)",
     "\nx = mean",
     "\ns = standard deviation",
     "\nn = number of observations",
-    "\nalpha = significance level (as decimal)"
+    "\nalpha = significance level (as decimal)",
+    "\n\nreturns delta"
   )
+  
+  img <- c("twoSampleConf.png")
+  printImages(img, 1, 1)
 }
 
 ## Hypothesis testing ##
@@ -76,8 +342,11 @@ oneSampleHyp <- function(x, s, n, alpha, delta){
   cat(
     "tobs =", tobs,
     "\np-value =", p,
-    "\nc-value =", c 
+    "\nc-value =", c,
+    "\n"
   )
+  
+  return(c(tobs,p,c))
 }
 
 ioneSampleHyp <- function(...){
@@ -88,8 +357,10 @@ ioneSampleHyp <- function(...){
     "\ns = standard deviation",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndelta = hypothetical mean"
+    "\ndelta = hypothetical mean",
+    "\n\nreturns c(tobs, p-value, critical value)"
   )
+  
   img <- c("oneSampleHyp.png")
   printImages(img, 1, 1)
 }
@@ -105,8 +376,11 @@ twoSampleHyp <- function(x1, s1, n1, x2, s2, n2, alpha, delta){
     "tobs =", tobs,
     "\ndf =", v,
     "\np-value =", p,
-    "\nc-value =", c
+    "\nc-value =", c,
+    "\n"
     )
+  
+  return(c(tobs,v,p,c))
 }
 
 itwoSampleHyp <- function(...){
@@ -117,8 +391,10 @@ itwoSampleHyp <- function(...){
     "\ns = standard deviation",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndelta = hypothetical difference"
+    "\ndelta = hypothetical difference",
+    "\n\nreturns c(tobs, df, p-value, critical value)"
     )
+  
   img <- c("twoSampleHyp.png")
   printImages(img, 1, 1)
   
@@ -129,6 +405,7 @@ itwoSampleHyp <- function(...){
 oneSampleBoot <- function(set, k , func){
   simSamples <- replicate(k, sample(set, replace = TRUE))
   simDist <- apply(simSamples, 2, func)
+  
   return(simDist)
 }
 
@@ -141,6 +418,7 @@ ioneSampleBoot <- function(...){
     "\nfunc = function to extract feature of interst",
     "\n\nreturns simulated distribution (as a vector)"
     )
+  
   img <- c("oneSampleBoot.png")
   printImages(img, 1, 1)
 }
@@ -149,6 +427,7 @@ twoSampleBoot <- function(set1, set2, k, func){
   simSamplesOne <- replicate(k, sample(set1, replace = TRUE))
   simSamplesTwo <- replicate(k, sample(set2, replace = TRUE))
   simDist <- apply(simSamplesOne, 2, func) - apply(simSamplesTwo, 2, func)
+  
   return(simDist)
 }
 
@@ -161,6 +440,7 @@ itwoSampleBoot <- function(...){
     "\nfunc = function to extract feature of interst",
     "\n\nreturns simulated distribution (as a vector)"
   )
+  
   img <- c("twoSampleBoot.png")
   printImages(img, 1, 1)
 }
@@ -171,6 +451,7 @@ oneSampleParaBoot <- function(k, func, n, model, ...){
   rmodel <- paste("r", model, sep="")
   simSamples <- replicate(k, do.call(rmodel, args))
   simDist <- apply(simSamples, 2, func) 
+  
   return(simDist)
 }
 
@@ -185,15 +466,17 @@ ioneSampleParaBoot <- function(...){
     "\nargs... = model parameters",
     "\n\nreturns simulated distribution (as a vector)"
   )
+  
   img <- c("oneSampleParaBoot.png")
   printImages(img, 1, 1)
 }
 
 twoSampleParaBoot <- function(k, func, n1, n2, model, listArgs1, listArgs2){
   rmodel <- paste("r", model, sep="")
-  simSamplesOne <- replicate(k, do.call(rmodel, listArgs1))
-  simSamplesTwo <- replicate(k, do.call(rmodel, listArgs2))
+  simSamplesOne <- replicate(k, do.call(rmodel, c(n1, listArgs1)))
+  simSamplesTwo <- replicate(k, do.call(rmodel, c(n2, listArgs2)))
   simDist <- apply(simSamplesOne, 2, func) - apply(simSamplesTwo, 2, func) 
+  
   return(simDist)
 }
 
@@ -205,9 +488,10 @@ itwoSampleParaBoot <- function(...){
     "\nfunc = function to extract feature of interst",
     "\nn = size of sample",
     "\nmodel = assumed distribution (as string)",
-    "\nlistArgs = model parameters (as list)",
-    "\n\nreturns simulated distribution (as a vector)"
+    "\nlistArgs = model parameters (as a list)",
+    "\n\nreturns simulated distribution (as a list)"
   )
+  
   img <- c("twoSampleParaBoot.png")
   printImages(img, 1, 1)
 }
@@ -215,25 +499,28 @@ itwoSampleParaBoot <- function(...){
 
 ## Correlation ##
 
-cor <- function(set1, set2){
+cor <- function(v1, v2){
   n <- length(set1)
   
-  mean1 <- mean(set1)
-  sd1 <- sd(set1)
+  mean1 <- mean(v1)
+  sd1 <- sd(v1)
   
-  sd2 <- sd(set2)
-  mean2 <- mean(set2)
+  sd2 <- sd(v2)
+  mean2 <- mean(v2)
   
-  covar <- 1/(n-1)*sum((set1-mean1)*(set2-mean2))
+  covar <- 1/(n-1)*sum((v1-mean1)*(v2-mean2))
   cor <- covar/(sd1*sd2)
+  
   return(cor)
 }
 
 icor <- function(...){
-  cat("Calculate correlation between two sets of equal size",
-      "\n\n(set1, set2)",
-      "\nset = vector of observations",
-      "\n\nreturn correlation coefficient")
+  cat(
+    "Calculate correlation between two vectors of equal size",
+    "\n\n(v1, v2)",
+    "\nv = vector of observations",
+    "\n\nreturn correlation coefficient"
+  )
   
   imgs <- c("covariance.png","correlation.png")
   printImages(imgs, 2, 1)
@@ -248,6 +535,12 @@ icor <- function(...){
 #############################################
 ## INFO FUNCTIONS
 #############################################
+
+ilinRegInfo <- function(...){
+  print("printing...")
+  imgs <- c("linReg.png", "linStdErr.png", "stdErrBetas.png", "linHypBeta.png", "linConfBeta.png", "linConf.png", "linPredict.png")
+  printImages(imgs, 4, 2)
+}
 
 iconf <- function(...){
   imgs <- c("oneSampleConf.png","oneSampleVarSd.png","twoSampleConf.png")
@@ -273,7 +566,62 @@ ipropConvert <- function(...){
     )
 }
 
+icalcRules <- function(...){
+  imgs <- c("linearOne.png","linearMore.png", "nonLinearVar.png", "nonLinearVar2.png")
+  printImages(imgs, 2,2)
+}
 
+## Distributions ##
+
+idists <- function(...){
+  cat(
+    "binom(n, p)",
+    "\npois(lambda)",
+    "\nhyper(n, a, N)",
+    "\nnorm(mu, sigma)",
+    "\nlnorm(alpha, beta)",
+    "\nexp(lambda)",
+    "\nunif(alpha, beta)",
+    "\nt(v)",
+    "\nchisq(v)",
+    "\nf(?)"
+  )
+} 
+
+iexpDist <- function(...){
+  imgs <- c("expDist.png")
+  printImages(imgs, 1,1)
+}
+
+ilogNormDist <- function(...){
+  imgs <- c("logNormDist.png")
+  printImages(imgs, 1,1)
+}
+
+inormDist <- function(...){
+  imgs <- c("normDist.png")
+  printImages(imgs, 1,1)
+}
+
+iuniDist <- function(...){
+  imgs <- c("uniDist.png")
+  printImages(imgs, 1,1)
+}
+
+ipoisDist <- function(...){
+  imgs <- c("poisDist.png")
+  printImages(imgs, 1,1)
+}
+
+ihypgeoDist <- function(...){
+  imgs <- c("hypgeoDist.png")
+  printImages(imgs, 1,1)
+}
+
+ibinomDist <- function(...){
+  imgs <- c("binomDist.png")
+  printImages(imgs, 1,1)
+}
 
 #############################################
 ## HELP FUNCTIONS 
