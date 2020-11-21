@@ -70,7 +70,7 @@ twoPropHyp <- function(x1, x2, n1, n2, alpha, df){
   c <- qchisq(1-alpha, df)
   
   cat(
-    "phat = ", phat,
+    "phat =", phat,
     "\nzobs =", zobs,
     "\np-value =", p,
     "\nc-value =", c,
