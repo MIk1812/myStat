@@ -108,6 +108,8 @@ linConf <- function(x, y, x0, alpha){
     paste(
       "beta0 = ", beta0,
       "\nbeta1 = ", beta1,
+      "\nsdtErr = ", stdErr,
+      "\nSxx = ", Sxx,
       "\ny0 = ", y0,
       "\nt = ", t,
       "\ndelta = ", delta,
@@ -142,6 +144,8 @@ linPredict <- function(x, y, x0, alpha){
     paste(
       "beta0 = ", beta0,
       "\nbeta1 = ", beta1,
+      "\nsdtErr = ", stdErr,
+      "\nSxx = ", Sxx,
       "\ny0 = ", y0,
       "\nt = ", t,
       "\ndelta = ", delta,

@@ -50,6 +50,28 @@ criticalValueT <- function(alpha, df){
   return(c)
 }
 
+critivalValueChi <- function(alpha, df){
+  c <- qchisq(1-alpha, df)
+  
+  cat(
+    "Critical value =", c,
+    "\n"
+  )
+  
+  return(c)
+}
+
+critivalValueF <- function(alpha, n, k){
+  c <- qf(1-alpha, k-1, n-k)
+  
+  cat(
+    "Critical value =", c,
+    "\n"
+  )
+  
+  return(c)
+}
+
 vectorToMatrix <- function(x, nrow, ncol){
   t(matrix(x, ncol, nrow))
 }
@@ -95,13 +117,32 @@ isigLevCovnert <- function(...){
 icriticalValueT <- function(...){
   cat(
     "Calculate critical value from certain alpha for a given T-dist",
+    "\n\n(alpha, df)",
     "\nalpha = significance level (as decimal)",
     "\ndf = degrees of freemdom",
     "\n\nreturns critical value"
   )
-  
-  img <- c("res/twoSampleHyp.png")
-  printImages(img, 1, 1)
+}
+
+icriticalValueChi <- function(...){
+  cat(
+    "Calculate critical value from certain alpha for a given Chi-dist",
+    "\n\n(alpha, df)",
+    "\nalpha = significance level (as decimal)",
+    "\ndf = degrees of freemdom",
+    "\n\nreturns critical value"
+  )
+}
+
+icriticalValueF <- function(...){
+  cat(
+    "Calculate critical value from certain alpha for a given F-dist",
+    "\n\n(alpha, n, k)",
+    "\nalpha = significance level (as decimal)",
+    "\nn = number of observations",
+    "\nk = number of groups",
+    "\n\nreturns critical value"
+  )
 }
 
 ivectorToMatrix <- function(...){

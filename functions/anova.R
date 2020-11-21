@@ -1,6 +1,6 @@
 ## ANOVA ##
 
-SST <- function(x, nrow, ncol){
+anovaSST <- function(x, nrow, ncol){
   data <- t(matrix(x, ncol, nrow))
   
   SST <- 0
@@ -17,7 +17,7 @@ SST <- function(x, nrow, ncol){
   return(SST)
 }
 
-SSE <- function(x, nrow, ncol){
+anovaSSE <- function(x, nrow, ncol){
   data <- t(matrix(x, ncol, nrow))
   
   SSE <- 0
@@ -34,7 +34,7 @@ SSE <- function(x, nrow, ncol){
   return(SSE)
 }
 
-SSTr <- function(x, nrow, ncol){
+anovaSSTr <- function(x, nrow, ncol){
   data <- t(matrix(x, ncol, nrow))
   
   SSTr <- 0
@@ -51,7 +51,7 @@ SSTr <- function(x, nrow, ncol){
   return(SSTr)
 }
 
-MSTr <- function(SSTr, k){
+anovaMSTr <- function(SSTr, k){
   MSTr <- SSTr/(k-1)
   
   cat(
@@ -62,7 +62,7 @@ MSTr <- function(SSTr, k){
   return(MSTr)
 }
 
-MSE <- function(SSE, n, k){
+anovaMSE <- function(SSE, n, k){
   MSE <- SSE/(n-k)
   
   cat(
@@ -127,7 +127,7 @@ postAnovaConf <- function(y1, n1, y2, n2, n, k, MSE, alpha){
 ## INFO FUNCTIONS
 #############################################
 
-iSST <- function(...){
+ianovaSST <- function(...){
   cat(
     "Calculates STT (total variance)",
     "\n\n(x, nrow, ncol)",
@@ -147,7 +147,7 @@ iSST <- function(...){
   printImages(img, 1, 1)
 }
 
-iSSE <- function(...){
+ianovaSSE <- function(...){
   cat(
     "Calculates SSE ",
     "\n\n(x, nrow, ncol)",
@@ -167,7 +167,7 @@ iSSE <- function(...){
   printImages(img, 1, 1)
 }
 
-iSSTr <- function(...){
+ianovaSSTr <- function(...){
   cat(
     "Calculates SSTr ",
     "\n\n(x, nrow, ncol)",
@@ -187,7 +187,7 @@ iSSTr <- function(...){
   printImages(img, 1, 1)
 }
 
-iMSTr <- function(...){
+ianovaMSTr <- function(...){
   cat(
     "Calculates MSTr",
     "\n\n(SSTr, k)",
@@ -200,7 +200,7 @@ iMSTr <- function(...){
   printImages(img, 1, 1)
 }
 
-iMSE <- function(...){
+ianovaMSE <- function(...){
   cat(
     "Calculates MSE",
     "\n\n(SSE, n, k)",
