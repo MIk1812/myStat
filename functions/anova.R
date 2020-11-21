@@ -1,12 +1,5 @@
 ## ANOVA ##
 
-x <- c(5.01,5.59,3.02,
-       6.23,5.13,4.76,
-       5.98,5.33,3.46,
-       5.31,4.65,4.12,
-       5.13,5.52,4.51,
-       5.65,4.92,4.42)
-
 SST <- function(x, nrow, ncol){
   data <- t(matrix(x, ncol, nrow))
   
@@ -69,7 +62,7 @@ MSTr <- function(SSTr, k){
   return(MSTr)
 }
 
-MSE() <- function(SSE, n, k){
+MSE <- function(SSE, n, k){
   MSE <- SSE/(n-k)
   
   cat(
