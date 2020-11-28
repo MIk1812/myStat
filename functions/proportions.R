@@ -1,6 +1,6 @@
 ## Proportions ##
 
-onePropConf <- function(n, phat, alpha){
+oneSamplePropConf <- function(n, phat, alpha){
   z <- qnorm(1-alpha/2)
   se <- sqrt((phat*(1-phat))/n)
   delta <- z*se
@@ -22,7 +22,7 @@ onePropConf <- function(n, phat, alpha){
   return(delta)
 }
 
-onePropHyp <- function(x, n, p0, alpha){
+oneSamplePropHyp <- function(x, n, p0, alpha){
   zobs <- (x-n*p0)/(sqrt(n*p0*(1-p0)))
   p <- 2*(1-pnorm(abs(zobs)))
   c <- qnorm(1-alpha/2)
@@ -37,7 +37,7 @@ onePropHyp <- function(x, n, p0, alpha){
   return(c(zobs,p,c))
 }
 
-twoPropConf <- function(n1, n2, phat1, phat2, alpha){
+twoSamplePropConf <- function(n1, n2, phat1, phat2, alpha){
   z <- qnorm(1-alpha/2)
   se <- sqrt(((phat1*(1-phat1))/(n1))+((phat2*(1-phat2))/(n2)))
   delta <- z*se
@@ -61,13 +61,13 @@ twoPropConf <- function(n1, n2, phat1, phat2, alpha){
   return(delta)
 }
 
-twoPropHyp <- function(x1, x2, n1, n2, alpha, df){
+twoSamplePropHyp <- function(x1, x2, n1, n2, alpha){
   phat1 <- x1/n1
   phat2 <- x2/n2
   phat <- (x1+x2)/(n1+n2)
   zobs <- (phat1-phat2)/(sqrt(phat*(1-phat)*(1/n1+1/n2)))
-  p <- 1-pchisq(zobs, df)
-  c <- qchisq(1-alpha, df)
+  p <- 2*(1-pnorm(abs(zobs)))
+  c <- qnorm(1-alpha/2)
   
   cat(
     "phat =", phat,
@@ -94,11 +94,11 @@ propMeanVar <- function(p, n){
 ## INFO FUNCTIONS
 #############################################
 
-ionePropConf <- function(...){
+ioneSamplePropConf <- function(...){
   cat(
     "One proportion confidence interval",
     "\n\n(n, phat, alpha)",
-    "\nx = number of observations",
+    "\nn = number of observations",
     "\nphat = estimated proportion (as decimal)",
     "\nalpha = significance level (as decimal)",
     "\n\nreturns delta"
@@ -108,13 +108,13 @@ ionePropConf <- function(...){
   printImages(img, 1, 1)
 }
 
-ionePropHyp <- function(...){
+ioneSamplePropHyp <- function(...){
   cat(
     "One proportion hypothesis testing",
     "\n\n(x, n, p0, alpha)",
     "\nx = number of successes",
     "\nn = number of observations",
-    "\np0 = hypothetical p (H0)",
+    "\np0 = hypothetical p (H0) (as decimal)",
     "\nalpha = significance level (as decimal)",
     "\n\nreturns c(zobs, p-value, critical value)"
   )
@@ -123,11 +123,11 @@ ionePropHyp <- function(...){
   printImages(img, 1, 1)
 }
 
-itwoPropConf <- function(...){
+itwoSamplePropConf <- function(...){
   cat(
     "Two proportions confidence interval",
     "\n\n(n1, n2, phat1, phat2, alpha)",
-    "\nx = number of observations",
+    "\nn = number of observations",
     "\nphat = estimated proportion (as decimal)",
     "\nalpha = significance level (as decimal)",
     "\n\nreturns delta"
@@ -137,7 +137,7 @@ itwoPropConf <- function(...){
   printImages(img, 1, 1)
 }
 
-itwoPropHyp <- function(...){
+itwoSamplePropHyp <- function(...){
   cat(
     "Two proportions hypothesis testing",
     "\n\n(x1, x2, n1, n2, alpha, df)",

@@ -3,9 +3,15 @@ library(grid)
 library(gridExtra)
 
 ROOT <- "/Users/mikkeldanielsen/myStat/"
+
+#Import functions
 setwd(paste(ROOT, "functions", sep="/"))
 file.sources = list.files(pattern="*.R")
 sapply(file.sources, source, .GlobalEnv)
+
+#############################################
+## HELP FUNCTIONS
+#############################################
 
 printImages <- function(files, nRow, nCol){
   
