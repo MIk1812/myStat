@@ -171,7 +171,7 @@ ilinReg <- function(...){
     "\n\nreturns c(beta0, beta1)"
   )
   
-  img <- c("res/linReg.png")
+  img <- c(paste("res", SEPERATOR, "linReg.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -183,7 +183,7 @@ ilinStdErr <- function(...){
     "\n\nreturns redidual standard error"
   )
   
-  img <- c("res/linStdErr.png")
+  img <- c(paste("res", SEPERATOR, "linStdErr.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -194,7 +194,7 @@ ilinResiduals <- function(...){
     "\nx, y = vector of observations",
     "\n\nreturns vector of residuals"
   )
-  img <- c("res/linResiduals.png")
+  img <- c(paste("res", SEPERATOR, "linResiduals.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -206,7 +206,7 @@ ilinStdErrBeta <- function(...){
     "\n\nreturns c(StdErrBeta0, StdErrBeta1)"
   )
   
-  img <- c("res/stdErrBetas.png")
+  img <- c(paste("res", SEPERATOR, "stdErrBetas.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -222,7 +222,7 @@ ilinHypBeta <- function(...){
     "\n\nreturns c(tobs, p-value, critical value)"
   )
   
-  img <- c("res/linHypBeta.png")
+  img <- c(paste("res", SEPERATOR, "linHypBeta.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -237,7 +237,7 @@ ilinConfBeta <- function(...){
     "\n\n returns delta"
   )
   
-  img <- c("res/linConfBeta.png")
+  img <- c(paste("res", SEPERATOR, "linConfBeta.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -251,7 +251,7 @@ ilinConf <- function(...){
     "\n\n returns c(y0, delta)"
   )
   
-  img <- c("res/linConf.png")
+  img <- c(paste("res", SEPERATOR, "linConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -265,12 +265,18 @@ ilinPredict <- function(...){
     "\n\n returns c(y0, delta)"
   )
   
-  img <- c("res/linPredict.png")
+  img <- c(paste("res", SEPERATOR, "linPredict.png", sep=""))
   printImages(img, 1, 1)
 }
 
 ilinRegInfo <- function(...){
   print("printing...")
-  imgs <- c("res/linReg.png", "res/linStdErr.png", "res/stdErrBetas.png", "res/linHypBeta.png", "res/linConfBeta.png", "res/linConf.png", "res/linPredict.png")
+  imgs <- c(paste("res", SEPERATOR, "linReg.png", sep=""), 
+            paste("res", SEPERATOR, "linStdErr.png", sep=""), 
+            paste("res", SEPERATOR, "stdErrBetas.png", sep=""), 
+            paste("res", SEPERATOR, "linHypBeta.png", sep=""), 
+            paste("res", SEPERATOR, "linConfBeta.png", sep=""), 
+            paste("res", SEPERATOR, "linConf.png", sep=""), 
+            paste("res", SEPERATOR, "linPredict.png", sep=""))
   printImages(imgs, 4, 2)
 }

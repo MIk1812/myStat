@@ -143,7 +143,7 @@ ianovaSST <- function(...){
     "\n\nreturns SST"
   )
   
-  img <- c("res/anovaCalc.png")
+  img <- c(paste("res", SEPERATOR, "anovaCalc.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -163,7 +163,7 @@ ianovaSSE <- function(...){
     "\n\nreturns SST"
   )
 
-  img <- c("res/anovaCalc.png")
+  img <- c(paste("res", SEPERATOR, "anovaCalc.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -183,7 +183,7 @@ ianovaSSTr <- function(...){
     "\n\nreturns SST"
   )
   
-  img <- c("res/anovaCalc.png")
+  img <- c(paste("res", SEPERATOR, "anovaCalc.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -196,7 +196,7 @@ ianovaMSTr <- function(...){
     "\n\nreturns MSTr"
   )
   
-  img <- c("res/anovaTable.png")
+  img <- c(paste("res", SEPERATOR, "anovaTable.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -210,7 +210,7 @@ ianovaMSE <- function(...){
     "\n\nreturns MSE"
   )
   
-  img <- c("res/anovaTable.png")
+  img <- c(paste("res", SEPERATOR, "anovaTable.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -226,7 +226,7 @@ ianovaHyp <- function(...){
     "\n\nreturns c(fobs, p-value, critical value)"
   )
   
-  img <- c("res/anovaF.png")
+  img <- c(paste("res", SEPERATOR, "anovaF.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -242,7 +242,7 @@ ipostAnovaHyp <- function(...){
     "\n\nreturns c(tobs, p-value, critical value)"
   )
   
-  img <- c("res/anovaPostHyp.png")
+  img <- c(paste("res", SEPERATOR, "anovaPostHyp.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -259,13 +259,17 @@ ipostAnovaConf <- function(...){
     "\n\nreturns delta"
   )
   
-  img <- c("res/anovaPostConf.png")
+  img <- c(paste("res", SEPERATOR, "anovaPostConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
 ianova <- function(...){
   print("printing...")
-  imgs <- c("res/anovaCalc.png", "res/anovaF.png", "res/anovaTable.png", "res/anovaPostHyp.png", "res/anovaPostConf.png")
+  imgs <- c(paste("res", SEPERATOR, "anovaCalc.png", sep=""), 
+            paste("res", SEPERATOR, "anovaF.png", sep=""), 
+            paste("res", SEPERATOR, "anovaTable.png", sep=""), 
+            paste("res", SEPERATOR, "anovaPostHyp.png", sep=""), 
+            paste("res", SEPERATOR, "anovaPostConf.png", sep=""))
   printImages(imgs, 3,2)
 }
 

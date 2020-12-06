@@ -3,9 +3,10 @@ library(grid)
 library(gridExtra)
 
 ROOT <- "/Users/mikkeldanielsen/myStat/"
+SEPERATOR <- "/"
 
 #Import functions
-setwd(paste(ROOT, "functions", sep="/"))
+setwd(paste(ROOT, "functions", sep=SEPERATOR))
 file.sources = list.files(pattern="*.R")
 sapply(file.sources, source, .GlobalEnv)
 

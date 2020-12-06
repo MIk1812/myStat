@@ -48,7 +48,7 @@ ioneSampleBoot <- function(...){
     "\n\nreturns simulated distribution (as a vector)"
   )
   
-  img <- c("res/oneSampleBoot.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleBoot.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -62,7 +62,7 @@ itwoSampleBoot <- function(...){
     "\n\nreturns simulated distribution (as a vector)"
   )
   
-  img <- c("res/twoSampleBoot.png")
+  img <- c(paste("res", SEPERATOR, "twoSampleBoot.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -78,7 +78,7 @@ ioneSampleParaBoot <- function(...){
     "\n\nreturns simulated distribution (as a vector)"
   )
   
-  img <- c("res/oneSampleParaBoot.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleParaBoot.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -94,12 +94,15 @@ itwoSampleParaBoot <- function(...){
     "\n\nreturns simulated distribution (as a list)"
   )
   
-  img <- c("res/twoSampleParaBoot.png")
+  img <- c(paste("res", SEPERATOR, "twoSampleParaBoot.png", sep=""))
   printImages(img, 1, 1)
 }
 
 iboot <- function(...){
   print("printing...")
-  imgs <- c("res/oneSampleBoot.png","res/twoSampleBoot.png", "res/oneSampleParaBoot.png", "res/twoSampleParaBoot.png")
+  imgs <- c(paste("res", SEPERATOR, "oneSampleBoot.png", sep=""),
+            paste("res", SEPERATOR, "twoSampleBoot.png", sep=""), 
+            paste("res", SEPERATOR, "oneSampleParaBoot.png", sep=""), 
+            paste("res", SEPERATOR, "twoSampleParaBoot.png", sep=""))
   printImages(imgs, 2,2)
 }

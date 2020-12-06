@@ -57,7 +57,7 @@ ioneSampleConf <- function(...){
     "\n\n returns delta"
   )
   
-  img <- c("res/oneSampleConf.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -72,11 +72,13 @@ itwoSampleConf <- function(...){
     "\n\nreturns delta"
   )
   
-  img <- c("res/twoSampleConf.png")
+  img <- c(paste("res", SEPERATOR, "twoSampleConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
 iconf <- function(...){
-  imgs <- c("res/oneSampleConf.png","res/oneSampleVarSd.png","res/twoSampleConf.png")
+  imgs <- c(paste("res", SEPERATOR, "oneSampleConf.png", sep=""),
+            paste("res", SEPERATOR, "oneSampleVarSd.png", sep=""),
+            paste("res", SEPERATOR, "twoSampleConf.png", sep=""))
   printImages(imgs, 2, 2)
 }

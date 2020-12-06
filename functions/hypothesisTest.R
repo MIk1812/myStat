@@ -48,7 +48,7 @@ ioneSampleHyp <- function(...){
     "\n\nreturns c(tobs, p-value, critical value)"
   )
   
-  img <- c("res/oneSampleHyp.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleHyp.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -64,11 +64,12 @@ itwoSampleHyp <- function(...){
     "\n\nreturns c(tobs, df, p-value, critical value)"
   )
   
-  img <- c("res/twoSampleHyp.png")
+  img <- c(paste("res", SEPERATOR, "twoSampleHyp.png", sep=""))
   printImages(img, 1, 1)
 }
 
 ihyp <- function(...){
-  imgs <- c("res/oneSampleHyp.png","res/twoSampleHyp.png")
+  imgs <- c(paste("res", SEPERATOR, "oneSampleHyp.png", sep=""),
+            paste("res", SEPERATOR, "twoSampleHyp.png", sep=""))
   printImages(imgs, 1,2)
 }

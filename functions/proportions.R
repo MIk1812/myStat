@@ -104,7 +104,7 @@ ioneSamplePropConf <- function(...){
     "\n\nreturns delta"
   )
   
-  img <- c("res/onePropConf.png")
+  img <- c(paste("res", SEPERATOR, "onePropConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -119,7 +119,7 @@ ioneSamplePropHyp <- function(...){
     "\n\nreturns c(zobs, p-value, critical value)"
   )
   
-  img <- c("res/onePropHyp.png")
+  img <- c(paste("res", SEPERATOR, "onePropHyp.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -133,7 +133,7 @@ itwoSamplePropConf <- function(...){
     "\n\nreturns delta"
   )
   
-  img <- c("res/twoPropConf.png")
+  img <- c(paste("res", SEPERATOR, "twoPropConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -148,7 +148,7 @@ itwoSamplePropHyp <- function(...){
     "\n\nreturns c(phat, zobs, p-value, critical value)"
   )
   
-  img <- c("res/twoPropHyp.png")
+  img <- c(paste("res", SEPERATOR, "twoPropHyp.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -160,12 +160,16 @@ ipropMeanVar <- function(...){
     "\nn = number of observations"
   )
   
-  img <- c("res/propMeanVar.png")
+  img <- c(paste("res", SEPERATOR, "propMeanVar.png", sep=""))
   printImages(img, 1, 1)
 }
 
 iprop <- function(...){
   print("printing...")
-  imgs <- c("res/propMeanVar.png", "res/twoPropHyp.png", "res/twoPropConf.png", "res/onePropHyp.png", "res/onePropConf.png")
+  imgs <- c(paste("res", SEPERATOR, "propMeanVar.png", sep=""), 
+            paste("res", SEPERATOR, "twoPropHyp.png", sep=""), 
+            paste("res", SEPERATOR, "twoPropConf.png", sep=""), 
+            paste("res", SEPERATOR, "onePropHyp.png", sep=""), 
+            paste("res", SEPERATOR, "onePropConf.png", sep=""))
   printImages(imgs, 2,3)
 }

@@ -10,7 +10,10 @@ iprobConvert <- function(...){
 }
 
 icalcRules <- function(...){
-  imgs <- c("res/linearOne.png","res/linearMore.png", "res/nonLinearVar.png", "res/nonLinearVar2.png")
+  imgs <- c(paste("res", SEPERATOR, "linearOne.png", sep=""),
+            paste("res", SEPERATOR, "linearMore.png", sep=""), 
+            paste("res", SEPERATOR, "nonLinearVar.png", sep=""), 
+            paste("res", SEPERATOR, "nonLinearVar2.png", sep=""))
   printImages(imgs, 2,2)
 }
 
@@ -30,36 +33,36 @@ idists <- function(...){
 } 
 
 iexpDist <- function(...){
-  imgs <- c("res/expDist.png")
+  imgs <- c(paste("res", SEPERATOR, "expDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 ilogNormDist <- function(...){
-  imgs <- c("res/logNormDist.png")
+  imgs <- c(paste("res", SEPERATOR, "logNormDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 inormDist <- function(...){
-  imgs <- c("res/normDist.png")
+  imgs <- c(paste("res", SEPERATOR, "normDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 iuniDist <- function(...){
-  imgs <- c("res/uniDist.png")
+  imgs <- c(paste("res", SEPERATOR, "uniDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 ipoisDist <- function(...){
-  imgs <- c("res/poisDist.png")
+  imgs <- c(paste("res", SEPERATOR, "poisDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 ihypgeoDist <- function(...){
-  imgs <- c("res/hypgeoDist.png")
+  imgs <- c(paste("res", SEPERATOR, "hypgeoDist.png", sep=""))
   printImages(imgs, 1,1)
 }
 
 ibinomDist <- function(...){
-  imgs <- c("res/binomDist.png")
+  imgs <- c(paste("res", SEPERATOR, "binomDist.png", sep=""))
   printImages(imgs, 1,1)
 }

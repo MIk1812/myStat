@@ -55,7 +55,7 @@ ioneSampleSizeConf <- function(...){
     "\n\nreturns n"
   )
   
-  img <- c("res/oneSampleSizeConf.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleSizeConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -70,7 +70,7 @@ ioneSampleSizePower <- function(...){
     "\n\nreturns n"
   )
   
-  img <- c("res/oneSampleSizePower.png")
+  img <- c(paste("res", SEPERATOR, "oneSampleSizePower.png", sep=""))
   printImages(img, 1, 1)
 }
 
@@ -84,12 +84,14 @@ ionePropSizeConf <- function(...){
     "\n\nreturns n"
   )
   
-  img <- c("res/onePropSizeConf.png")
+  img <- c(paste("res", SEPERATOR, "onePropSizeConf.png", sep=""))
   printImages(img, 1, 1)
 }
 
 isampleSize <- function(...){
   print("printing...")
-  imgs <- c("res/oneSampleSizeConf.png", "res/oneSampleSizePower.png", "res/onePropSizeConf.png")
+  imgs <- c(paste("res", SEPERATOR, "oneSampleSizeConf.png", sep=""), 
+            paste("res", SEPERATOR, "oneSampleSizePower.png", sep=""), 
+            paste("res", SEPERATOR, "onePropSizeConf.png", sep=""))
   printImages(imgs, 2,2)
 }

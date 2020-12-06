@@ -89,7 +89,8 @@ icor <- function(...){
     "\n\nreturns correlation coefficient"
   )
   
-  imgs <- c("res/covariance.png","res/correlation.png")
+  imgs <- c(paste("res", SEPERATOR, "covariance.png", sep=""),
+            paste("res", SEPERATOR, "correlation.png", sep=""))
   printImages(imgs, 2, 1)
 }
 
@@ -101,7 +102,8 @@ iR2 <- function(...){
     "\n\nreturns R^2 as decimal"
   )
   
-  imgs <- c("res/R2.png", "res/R2Cor.png")
+  imgs <- c(paste("res", SEPERATOR, "R2.png", sep=""), 
+            paste("res", SEPERATOR, "R2Cor.png", sep=""))
   printImages(imgs, 2, 1)
 }
 
