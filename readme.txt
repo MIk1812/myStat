@@ -1,4 +1,6 @@
-This is a library of functions meant to compliment the course 02323 Introduction to statistics. Note: the functions are not intended to replace other R functions but are to be used in conjunction with them.
+## DISCLAIMER ##
+
+This is a library of functions meant to compliment the course 02323 Introduction to Statistics at DTU. Note: the functions are not intended to replace other R functions but are to be used in conjunction with them.
 
 Use at your own risk. Most functions have been tested but not all.
 
@@ -16,8 +18,7 @@ This can be done using install.packages(c("png", "grid", "gridExtra"))
 3. Open myStat.R at the project root
 4. Update the variable ROOT and SEPERATOR to reflect the projects current location on the machine
 
-You can now import all the functions in a new R-script using source(), for instance:
-source("/Users/mikkeldanielsen/myStat/myStat.R")
+You can now import all the functions in a new R-script using source(), for instance: source("/Users/mikkeldanielsen/myStat/myStat.R")
 
 ## FUNCTIONS AVALIBLE ##
 
@@ -43,7 +44,7 @@ sampleSize.R
 	oneSampleSizeConf : function(ME, sigma, alpha)
 	oneSampleSizePower : function(mu0, mu1, sigma, alpha, beta)
 	onePropSizeConf : function(p, ME, alpha)
-		
+	
 other.R	cor : function (set1, set2)  
 	R2 : function (x, y)
 	sigLevCovnert : function (p)	criticalValueT : function (alpha, df)
