@@ -22,7 +22,9 @@ You can now import all the functions in a new R-script using source(), for insta
 
 ## FUNCTIONS AVALIBLE ##
 
-confidenceIntervals.R	oneSampleConf : function (x, s, n, alpha)  	twoSampleConf : function (x1, s1, n1, x2, s2, n2, alpha)  hypothesisTest.R	oneSampleHyp : function (x, s, n, alpha, delta)  	twoSampleHyp : function (x1, s1, n1, x2, s2, n2, alpha, delta)bootStrapping.R	oneSampleBoot : function (set, k, func)  	twoSampleBoot : function (set1, set2, k, func)  
+confidenceIntervals.R	oneSampleConf : function (x, s, n, alpha)  	twoSampleConf : function (x1, s1, n1, x2, s2, n2, alpha)
+	oneSampleVarConf : function(n, var, alpha)
+	oneSampleSdConf : function(n, sd, alpha)  hypothesisTest.R	oneSampleHyp : function (x, s, n, alpha, delta)  	twoSampleHyp : function (x1, s1, n1, x2, s2, n2, alpha, delta)bootStrapping.R	oneSampleBoot : function (set, k, func)  	twoSampleBoot : function (set1, set2, k, func)  
 	oneSampleParaBoot : function (k, func, n, model, ...)  	twoSampleParaBoot : function (k, func, n1, n2, model, listArgs1, listArgs2)    linearRegression.R	linReg : function (x, y)
 	linStdErr : function (x, y)  
 	linResiduals : function (x, y)  
@@ -32,11 +34,11 @@ confidenceIntervals.R	oneSampleConf : function (x, s, n, alpha)  	twoSampleCon
 	propMeanVar : function (p, n)
 
 anova.R
-	SST : function (x, nrow, ncol)  
-	SSE : function (x, nrow, ncol)
-	SSTr : function (x, nrow, ncol)
-	MSTr : function (SSTr, k)	
-	MSE : function (SSE, n, k)  
+	anovaSST : function (x, nrow, ncol)  
+	anovaSSE : function (x, nrow, ncol)
+	anovaSSTr : function (x, nrow, ncol)
+	anovaMSTr : function (SSTr, k)	
+	anovaMSE : function (SSE, n, k)  
 	anovaHyp : function (SSTr, SSE, n, k, alpha)  
 	postAnovaHyp : function (y1, n1, y2, n2, n, k, MSE, alpha)    	postAnovaConf : function (y1, n1, y2, n2, n, k, MSE, alpha)  
 
@@ -47,7 +49,7 @@ sampleSize.R
 	
 other.R	cor : function (set1, set2)  
 	R2 : function (x, y)
-	sigLevCovnert : function (p)	criticalValueT : function (alpha, df)
+	sigLevConvert : function (p)	criticalValueT : function (alpha, df)
 	criticalValueChi : function (alpha, df)
 	criticalValueF : function (alpha, n, k) 	vectorToMatrix : function (x, nrow, ncol)  
 

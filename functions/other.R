@@ -24,7 +24,7 @@ R2 <- function(x,y){
   return(R2)
 }
 
-sigLevCovnert <- function(p){
+sigLevConvert <- function(p){
   alpha = 1-p
   tup = 1-alpha/2
   tdown = alpha/2
@@ -107,7 +107,7 @@ iR2 <- function(...){
   printImages(imgs, 2, 1)
 }
 
-isigLevCovnert <- function(...){
+isigLevConvert <- function(...){
   cat(
     "Calculates relevant quantities from the given significance level",
     "\n\n(p)",
