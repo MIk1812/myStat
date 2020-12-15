@@ -28,7 +28,7 @@ oneSampleSizePower <- function(mu0, mu1, sigma, alpha, beta){
   return(n)
 }
 
-onePropSizeConf <- function(p, ME, alpha){
+oneSamplePropSizeConf <- function(p, ME, alpha){
   z <- qnorm(1-(alpha/2))
   n <- p*(1-p)*(z/ME)^2
   
@@ -74,7 +74,7 @@ ioneSampleSizePower <- function(...){
   printImages(img, 1, 1)
 }
 
-ionePropSizeConf <- function(...){
+ioneSamplePropSizeConf <- function(...){
   cat(
     "Calculates needed sample size (n) from parameters",
     "\n\n(p, ME, alpha)",

@@ -24,14 +24,19 @@ You can now import all the functions in a new R-script using source(), for insta
 
 confidenceIntervals.R	oneSampleConf : function (x, s, n, alpha)  	twoSampleConf : function (x1, s1, n1, x2, s2, n2, alpha)
 	oneSampleVarConf : function(n, var, alpha)
-	oneSampleSdConf : function(n, sd, alpha)  hypothesisTest.R	oneSampleHyp : function (x, s, n, alpha, delta)  	twoSampleHyp : function (x1, s1, n1, x2, s2, n2, alpha, delta)bootStrapping.R	oneSampleBoot : function (set, k, func)  	twoSampleBoot : function (set1, set2, k, func)  
-	oneSampleParaBoot : function (k, func, n, model, ...)  	twoSampleParaBoot : function (k, func, n1, n2, model, listArgs1, listArgs2)    linearRegression.R	linReg : function (x, y)
+	oneSampleSdConf : function(n, sd, alpha)  
+	iconf : function (...)hypothesisTest.R	oneSampleHyp : function (x, s, n, alpha, delta)  	twoSampleHyp : function (x1, s1, n1, x2, s2, n2, alpha, delta)
+	ihyp : function (...)bootStrapping.R	oneSampleBoot : function (set, k, func)  	twoSampleBoot : function (set1, set2, k, func)  
+	oneSampleParaBoot : function (k, func, n, model, ...)  	twoSampleParaBoot : function (k, func, n1, n2, model, listArgs1, listArgs2)  
+	iboot : function (...)  linearRegression.R	linReg : function (x, y)
 	linStdErr : function (x, y)  
 	linResiduals : function (x, y)  
 	linStdErrBeta : function (x, y)	
 	linHypBeta : function (beta, stdErrBeta, n, alpha, delta)  
-	linConfBeta : function (beta, stdErrBeta, n, alpha)  	linConf : function (x, y, x0, alpha)  	linPredict : function (x, y, x0, alpha)  proportions.R	oneSamplePropConf : function (n, phat, alpha)  	oneSamplePropHyp : function (x, n, p0, alpha)    	twoSamplePropConf : function (n1, n2, phat1, phat2, alpha)  	twoSamplePropHyp : function (x1, x2, n1, n2, alpha)  
+	linConfBeta : function (beta, stdErrBeta, n, alpha)  	linConf : function (x, y, x0, alpha)  	linPredict : function (x, y, x0, alpha)
+	ilinRegInfo : function (...) proportions.R	oneSamplePropConf : function (n, phat, alpha)  	oneSamplePropHyp : function (x, n, p0, alpha)    	twoSamplePropConf : function (n1, n2, phat1, phat2, alpha)  	twoSamplePropHyp : function (x1, x2, n1, n2, alpha)  
 	propMeanVar : function (p, n)
+	iprop : function (...)
 
 anova.R
 	anovaSST : function (x, nrow, ncol)  
@@ -40,12 +45,14 @@ anova.R
 	anovaMSTr : function (SSTr, k)	
 	anovaMSE : function (SSE, n, k)  
 	anovaHyp : function (SSTr, SSE, n, k, alpha)  
-	postAnovaHyp : function (y1, n1, y2, n2, n, k, MSE, alpha)    	postAnovaConf : function (y1, n1, y2, n2, n, k, MSE, alpha)  
+	postAnovaHyp : function (y1, n1, y2, n2, n, k, MSE, alpha)    	postAnovaConf : function (y1, n1, y2, n2, n, k, MSE, alpha) 
+	ianova : function (...) 
 
 sampleSize.R
 	oneSampleSizeConf : function(ME, sigma, alpha)
 	oneSampleSizePower : function(mu0, mu1, sigma, alpha, beta)
-	onePropSizeConf : function(p, ME, alpha)
+	oneSamplePropSizeConf : function(p, ME, alpha)
+	isampleSize : function (...)
 	
 other.R	cor : function (set1, set2)  
 	R2 : function (x, y)
