@@ -140,11 +140,10 @@ itwoSamplePropConf <- function(...){
 itwoSamplePropHyp <- function(...){
   cat(
     "Two proportions hypothesis testing",
-    "\n\n(x1, x2, n1, n2, alpha, df)",
+    "\n\n(x1, x2, n1, n2, alpha)",
     "\nx = number of successes",
     "\nn = number of observations",
     "\nalpha = significance level (as decimal)",
-    "\ndf = degrees of freedom",
     "\n\nreturns c(phat, zobs, p-value, critical value)"
   )
   
