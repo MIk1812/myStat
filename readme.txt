@@ -59,6 +59,7 @@ other.R	cor : function (set1, set2)
 	sigLevConvert : function (p)	criticalValueT : function (alpha, df)
 	criticalValueChi : function (alpha, df)
 	criticalValueF : function (alpha, n, k) 	vectorToMatrix : function (x, nrow, ncol)  
+	pooledVar : function(n1, var1, n2, var2)
 
 info.R
 	iprobConvert : function (...)

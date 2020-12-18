@@ -76,6 +76,16 @@ vectorToMatrix <- function(x, nrow, ncol){
   t(matrix(x, ncol, nrow))
 }
 
+pooledVar <- function(n1, var1, n2, var2){
+  poolVar <- ((n1-1)*var1+(n2-1)*var2)/(n1+n1-2)
+  
+  cat(
+    "Pooled variance =", poolVar,
+    "\n"
+  )
+  
+  return(poolVar)
+}
 
 #############################################
 ## INFO FUNCTIONS
@@ -163,3 +173,14 @@ ivectorToMatrix <- function(...){
     "\n\nreturns matrix"
   )
 }
+
+ipooledVar <- function(...){
+  cat(
+    "Calculates pooled variance",
+    "\n\n(n1, var1, n2, var2)",
+    "\nn = number of observations",
+    "\nvar = variance",
+    "\n\nreturns pooled variance"
+  )
+}
+
