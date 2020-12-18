@@ -154,7 +154,7 @@ itwoSamplePropHyp <- function(...){
 ipropMeanVar <- function(...){
   cat(
     "Calculates mean and variance of given proportion",
-    "\n\n(p, var)",
+    "\n\n(p, n)",
     "\np = proportion (as decimal)",
     "\nn = number of observations"
   )
