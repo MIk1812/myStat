@@ -182,5 +182,8 @@ ipooledVar <- function(...){
     "\nvar = variance",
     "\n\nreturns pooled variance"
   )
+  
+  imgs <- c(paste("res", SEPERATOR, "pooledVar.png", sep=""))
+  printImages(imgs, 1, 1)
 }
 
