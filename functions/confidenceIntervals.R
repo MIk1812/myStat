@@ -121,7 +121,7 @@ ioneSampleVarConf <- function(...){
     "One sample confidence interval for variance",
     "\n\n(n, var, alpha)",
     "\nn = number of observations",
-    "\nsvar = variance",
+    "\nvar = variance",
     "\nalpha = significance level (as decimal)"
   )
   
